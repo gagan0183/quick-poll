@@ -19,7 +19,10 @@ import com.spring.exception.ResourceNotFoundException;
 import com.spring.model.Poll;
 import com.spring.rep.PollRepository;
 
+import io.swagger.annotations.Api;
+
 @RestController
+@Api(value = "Polls", description = "Polls")
 public class PollController {
 
 	@Inject

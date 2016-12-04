@@ -17,7 +17,10 @@ import com.spring.dto.VoteResult;
 import com.spring.model.Vote;
 import com.spring.rep.VoteRepository;
 
+import io.swagger.annotations.Api;
+
 @RestController
+@Api(value = "Compute Result", description = "Compute Result")
 public class ComputeResultController {
 
 	@Inject

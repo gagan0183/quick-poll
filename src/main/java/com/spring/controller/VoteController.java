@@ -17,7 +17,10 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import com.spring.model.Vote;
 import com.spring.rep.VoteRepository;
 
+import io.swagger.annotations.Api;
+
 @RestController
+@Api(value = "Votes", description = "Votes")
 public class VoteController {
 
 	@Inject
