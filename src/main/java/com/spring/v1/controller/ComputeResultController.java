@@ -1,4 +1,4 @@
-package com.spring.controller;
+package com.spring.v1.controller;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -19,7 +19,8 @@ import com.spring.rep.VoteRepository;
 
 import io.swagger.annotations.Api;
 
-@RestController
+@RestController("computeResultControllerV1")
+@RequestMapping("/v1")
 @Api(value = "Compute Result", description = "Compute Result")
 public class ComputeResultController {
 

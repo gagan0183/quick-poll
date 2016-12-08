@@ -1,13 +1,18 @@
-package com.spring.controller;
+package com.spring.v3.controller;
 
 import java.net.URI;
 
 import javax.inject.Inject;
 import javax.validation.Valid;
 
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Sort.Direction;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,7 +26,8 @@ import com.spring.rep.PollRepository;
 
 import io.swagger.annotations.Api;
 
-@RestController
+@RestController("pollControllerV3")
+@RequestMapping({ "/v3", "/oauth2/v3" })
 @Api(value = "Polls", description = "Polls")
 public class PollController {
 
@@ -29,8 +35,9 @@ public class PollController {
 	private PollRepository pollRepository;
 
 	@RequestMapping(value = "/polls", method = RequestMethod.GET)
-	public ResponseEntity<Iterable<Poll>> getAllPolls() {
-		return new ResponseEntity<Iterable<Poll>>(pollRepository.findAll(), HttpStatus.OK);
+	public ResponseEntity<Iterable<Poll>> getAllPolls(Pageable pageable) {
+		return new ResponseEntity<Iterable<Poll>>(
+				pollRepository.findAll(new PageRequest(0, 5, new Sort(Direction.DESC, "question"))), HttpStatus.OK);
 	}
 
 	@RequestMapping(value = "/poll/{pollId}", method = RequestMethod.GET)
@@ -56,6 +63,7 @@ public class PollController {
 		return new ResponseEntity<>(HttpStatus.OK);
 	}
 
+	@PreAuthorize(value = "hasAuthority('ROLE_ADMIN')")
 	@RequestMapping(value = "/polls/{pollId}", method = RequestMethod.DELETE)
 	public ResponseEntity<?> deletePoll(@PathVariable("pollId") Long pollId) {
 		verifyPoll(pollId);

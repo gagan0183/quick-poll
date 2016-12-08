@@ -1,4 +1,4 @@
-package com.spring.controller;
+package com.spring.v1.controller;
 
 import java.net.URI;
 
@@ -19,7 +19,8 @@ import com.spring.rep.VoteRepository;
 
 import io.swagger.annotations.Api;
 
-@RestController
+@RestController("voteControllerV1")
+@RequestMapping("/v1")
 @Api(value = "Votes", description = "Votes")
 public class VoteController {
 

@@ -23,7 +23,7 @@ public class SwaggerConfig {
 
 	private ApiInfo apiInfo() {
 		ApiInfo apiInfo = new ApiInfoBuilder().title("quick-poll API").description("quick-poll Rest API")
-				.contact(new Contact("Gagan", "", "g.deepsingh1@gmail.com")).license("Personal license")
+				.contact(new Contact("Gagan", "", "g.deepsingh1@gmail.com")).license("Personal license").version("1.0")
 				.licenseUrl("http://gaganlicense.com").build();
 		return apiInfo;
 	}
